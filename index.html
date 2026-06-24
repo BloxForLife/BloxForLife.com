@@ -10,19 +10,77 @@
     <div class="container">
         <div class="profile-card">
             <img src="avatar.jpg" alt="Profile" class="avatar">
-            <h1>Ahmad Amro</h1>
-            <p class="tag">@BloxForLife</p>
+            
+            <!-- Requirement #1: Name updated -->
+            <h1>BloxForLife</h1>
             
             <div class="bio">
                 <p>Discord Bot Developer & Roblox Community Manager</p>
             </div>
 
+            <!-- Requirement #4: Live EEST Time -->
+            <div class="time-container">
+                <span id="local-time">Loading time...</span> (EEST)
+            </div>
+
+            <!-- Requirement #5 & #6: Music and Volume Bar -->
+            <div class="music-player">
+                <audio id="bg-music" src="lying2me.mp3" loop></audio>
+                <button id="play-btn" class="ctrl-btn">▶ Play</button>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.3">
+            </div>
+
+            <!-- Requirement #2: Actual Links -->
             <div class="links">
-                <a href="#" class="btn">Discord</a>
-                <a href="#" class="btn">Roblox</a>
-                <a href="#" class="btn">GitHub</a>
+                <a href="https://discord.com/users/1075335630353080340" target="_blank" class="btn discord">Discord</a>
+                <a href="https://www.roblox.com/users/4548670369/profile" target="_blank" class="btn roblox">Roblox</a>
+                <a href="https://github.com/BloxForLife" target="_blank" class="btn github">GitHub</a>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript to make the time tick and music work -->
+    <script>
+        // --- LIVE CLOCK SCRIPT ---
+        function updateTime() {
+            // EEST runs on the same timezone rules as Cairo
+            const timeOptions = { 
+                timeZone: 'Africa/Cairo', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            };
+            const timeString = new Date().toLocaleTimeString('en-US', timeOptions);
+            document.getElementById('local-time').textContent = timeString;
+        }
+        // Update time immediately, then every 1 second
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // --- MUSIC PLAYER SCRIPT ---
+        const music = document.getElementById('bg-music');
+        const playBtn = document.getElementById('play-btn');
+        const volumeSlider = document.getElementById('volume-slider');
+
+        // Initial volume setting
+        music.volume = 0.3;
+
+        // Play/Pause toggle
+        playBtn.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                playBtn.textContent = '⏸ Pause';
+            } else {
+                music.pause();
+                playBtn.textContent = '▶ Play';
+            }
+        });
+
+        // Volume slider hookup
+        volumeSlider.addEventListener('input', (e) => {
+            music.volume = e.target.value;
+        });
+    </script>
 </body>
 </html>
