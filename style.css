@@ -1,57 +1,42 @@
-.main-wrapper {
+.main-layout {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
     min-height: 100vh;
     padding: 20px;
 }
 
-/* Discord Sidebar Styling */
-.discord-profile {
-    width: 300px;
-    background: #111214;
-    border-radius: 8px;
+/* Sidebar Styling */
+.sidebar {
+    width: 280px;
+}
+
+.dc-card {
+    background: #1e1f22;
+    border-radius: 10px;
     overflow: hidden;
     color: white;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-.dc-banner {
-    height: 100px;
-    background-size: cover;
-    background-position: center;
+.dc-banner { height: 80px; background-color: #2b2d31; background-size: cover; }
+
+.dc-avatar-container { padding: 0 15px; margin-top: -35px; }
+
+.dc-avatar { 
+    width: 70px; height: 70px; 
+    border-radius: 50%; border: 6px solid #1e1f22; 
 }
 
-.dc-avatar-wrap {
-    padding: 0 20px;
-    margin-top: -40px;
-}
+.dc-info { padding: 15px; }
 
-.dc-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 6px solid #111214;
-}
-
-.dc-body {
-    padding: 15px 20px;
-}
-
-.dc-about {
-    font-size: 14px;
-    color: #b9bbbe;
-    margin-top: 10px;
-    white-space: pre-line;
-}
-
-/* Main Profile Card (The one from before) */
+/* Main Profile Card - keep your existing styles, just ensure it fits */
 .profile-card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    padding: 40px;
+    padding: 30px;
     border-radius: 20px;
-    width: 300px;
+    width: 350px;
     text-align: center;
 }
