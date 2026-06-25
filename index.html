@@ -3,29 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloxForLife | Bio</title>
+    <title>BloxForLife | Premium Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="bg-grid"></div>
+
     <div class="container">
         <div class="profile-card">
             
-            <div class="pfp-container">
-                <img src="blox.jpg" alt="Profile" class="avatar" id="discord-pfp">
+            <div class="pfp-wrapper animate-pop">
+                <div class="pfp-container">
+                    <img src="blox.jpg" alt="Profile" class="avatar" id="discord-pfp">
+                </div>
+                <div class="status-dot" id="discord-status"></div>
             </div>
             
-            <h1>BloxForLife</h1>
+            <h1 class="animate-up delay-1">BloxForLife</h1>
             
-            <div class="bio">
+            <div class="bio animate-up delay-2">
                 <p>Discord Bot Developer</p>
+                <div class="custom-status" id="custom-status-badge" style="display: none;">
+                    <i class="fa-solid fa-thought-bubble"></i> <span id="custom-status-text">Thinking...</span>
+                </div>
             </div>
 
-            <div class="time-container">
+            <div class="tech-stack animate-up delay-3">
+                <div class="tech-icon"><i class="fa-brands fa-python"></i></div>
+                <div class="tech-icon"><i class="fa-brands fa-node-js"></i></div>
+                <div class="tech-icon"><i class="fa-brands fa-js"></i></div>
+                <div class="tech-icon"><i class="fa-solid fa-database"></i></div>
+            </div>
+
+            <div class="time-container animate-up delay-4">
                 <i class="fa-regular fa-clock"></i> <span id="local-time">Loading time...</span> (EEST)
             </div>
 
-            <div class="music-player">
+            <div class="spotify-widget animate-up delay-4" id="spotify-widget" style="display: none;">
+                <img id="spot-art" src="" alt="Album Art" class="spot-art">
+                <div class="spot-info">
+                    <div class="spot-title" id="spot-title">Song Name</div>
+                    <div class="spot-artist" id="spot-artist">Artist Name</div>
+                </div>
+                <i class="fa-brands fa-spotify spot-logo"></i>
+            </div>
+
+            <div class="music-player animate-up delay-5">
                 <i class="fa-solid fa-music music-icon"></i>
                 <audio id="bg-music" src="lyin2me.mp3" loop></audio>
                 <button id="play-btn" class="ctrl-btn"><i class="fa-solid fa-play"></i> Play</button>
@@ -33,64 +57,90 @@
             </div>
 
             <div class="links">
-                <a href="https://discord.com/users/1075335630353080340" target="_blank" class="btn discord"><i class="fa-brands fa-discord"></i> Discord</a>
-                <a href="https://www.roblox.com/users/4548670369/profile" target="_blank" class="btn roblox"><i class="fa-solid fa-gamepad"></i> Roblox</a>
-                <a href="https://github.com/BloxForLife" target="_blank" class="btn github"><i class="fa-brands fa-github"></i> GitHub</a>
-                <a href="https://docs.google.com/document/d/11pyDSeXnB-HiSzZjVJNPtorc352CkmRGuYWCB3ZZ16c/edit?usp=sharing" target="_blank" class="btn roleplay"><i class="fa-solid fa-book-open"></i> My Roleplay Experience</a>
+                <a href="https://discord.com/users/1075335630353080340" target="_blank" class="btn discord animate-up delay-6"><i class="fa-brands fa-discord"></i> Discord</a>
+                <a href="https://www.roblox.com/users/4548670369/profile" target="_blank" class="btn roblox animate-up delay-7"><i class="fa-solid fa-gamepad"></i> Roblox</a>
+                <a href="https://github.com/BloxForLife" target="_blank" class="btn github animate-up delay-8"><i class="fa-brands fa-github"></i> GitHub</a>
+                <a href="https://docs.google.com/document/d/11pyDSeXnB-HiSzZjVJNPtorc352CkmRGuYWCB3ZZ16c/edit?usp=sharing" target="_blank" class="btn roleplay animate-up delay-9"><i class="fa-solid fa-book-open"></i> My Roleplay Experience</a>
             </div>
         </div>
     </div>
 
     <script>
-        // --- 1. LANYARD API (DISCORD PFP FETCHER) ---
+        // --- 1. LANYARD API (LIVE DATA FETCHER) ---
         const discordId = '1075335630353080340';
-        fetch(`https://api.lanyard.rest/v1/users/${discordId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && data.data.discord_user.avatar) {
-                    const avatarHash = data.data.discord_user.avatar;
-                    const extension = avatarHash.startsWith('a_') ? 'gif' : 'png';
-                    const avatarUrl = `https://cdn.discordapp.com/avatars/${discordId}/${avatarHash}.${extension}?size=512`;
-                    document.getElementById('discord-pfp').src = avatarUrl;
-                }
-            })
-            .catch(err => console.error('Lanyard Fetch Error:', err));
+        
+        function fetchLanyardData() {
+            fetch(`https://api.lanyard.rest/v1/users/${discordId}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        const u = data.data.discord_user;
+                        const lData = data.data;
+
+                        // 1. Avatar
+                        if (u.avatar) {
+                            const ext = u.avatar.startsWith('a_') ? 'gif' : 'png';
+                            document.getElementById('discord-pfp').src = `https://cdn.discordapp.com/avatars/${discordId}/${u.avatar}.${ext}?size=512`;
+                        }
+
+                        // 2. Status Dot Color
+                        const statusColors = { online: '#23a559', idle: '#f0b232', dnd: '#f23f42', offline: '#80848e' };
+                        document.getElementById('discord-status').style.backgroundColor = statusColors[lData.discord_status] || statusColors.offline;
+
+                        // 3. Custom Status
+                        const customAct = lData.activities.find(act => act.type === 4);
+                        const customBadge = document.getElementById('custom-status-badge');
+                        if (customAct && customAct.state) {
+                            document.getElementById('custom-status-text').innerText = customAct.state;
+                            customBadge.style.display = 'inline-flex';
+                        } else {
+                            customBadge.style.display = 'none';
+                        }
+
+                        // 4. Spotify Widget
+                        const spotWidget = document.getElementById('spotify-widget');
+                        if (lData.listening_to_spotify && lData.spotify) {
+                            document.getElementById('spot-art').src = lData.spotify.album_art_url;
+                            document.getElementById('spot-title').innerText = lData.spotify.song;
+                            document.getElementById('spot-artist').innerText = lData.spotify.artist;
+                            spotWidget.style.display = 'flex';
+                        } else {
+                            spotWidget.style.display = 'none';
+                        }
+                    }
+                })
+                .catch(err => console.error('Lanyard Error:', err));
+        }
+
+        // Fetch immediately, then update every 10 seconds so Spotify stays live
+        fetchLanyardData();
+        setInterval(fetchLanyardData, 10000);
 
         // --- 2. LIVE CLOCK SCRIPT ---
         function updateTime() {
-            const timeOptions = { 
-                timeZone: 'Africa/Cairo', // EEST Timezone
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit',
-                hour12: true 
-            };
-            const timeString = new Date().toLocaleTimeString('en-US', timeOptions);
-            document.getElementById('local-time').textContent = timeString;
+            const timeOptions = { timeZone: 'Africa/Cairo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            document.getElementById('local-time').textContent = new Date().toLocaleTimeString('en-US', timeOptions);
         }
         updateTime();
         setInterval(updateTime, 1000);
 
-        // --- 3. MUSIC PLAYER SCRIPT ---
+        // --- 3. BACKGROUND MUSIC PLAYER SCRIPT ---
         const music = document.getElementById('bg-music');
         const playBtn = document.getElementById('play-btn');
         const volumeSlider = document.getElementById('volume-slider');
-
         music.volume = 0.3;
         let hasAutoplayed = false;
 
-        // Click anywhere to play functionality
         document.addEventListener('click', (e) => {
             if (e.target.closest('#play-btn') || e.target.closest('#volume-slider')) return;
             if (!hasAutoplayed && music.paused) {
                 music.play().then(() => {
                     playBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
                     hasAutoplayed = true;
-                }).catch(err => console.log("Audio play blocked: ", err));
+                }).catch(() => {});
             }
         });
 
-        // Manual control toggle
         playBtn.addEventListener('click', () => {
             hasAutoplayed = true;
             if (music.paused) {
@@ -102,10 +152,7 @@
             }
         });
 
-        // Volume slider mechanism
-        volumeSlider.addEventListener('input', (e) => {
-            music.volume = e.target.value;
-        });
+        volumeSlider.addEventListener('input', (e) => music.volume = e.target.value);
     </script>
 </body>
 </html>
