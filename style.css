@@ -72,6 +72,15 @@ h1 { font-size: 38px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px
 
 .bio { margin-bottom: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .bio p { font-size: 18px; color: #a1a1aa; font-weight: 500; }
+.donate-text {
+    font-size: 13px !important;
+    color: #f0b232 !important;
+    font-weight: 600 !important;
+    background: rgba(240, 178, 50, 0.1);
+    border: 1px solid rgba(240, 178, 50, 0.25);
+    padding: 6px 14px;
+    border-radius: 20px;
+}
 
 /* Prominent Python Banner */
 .python-banner {
@@ -84,16 +93,85 @@ h1 { font-size: 38px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px
     align-items: center;
     justify-content: center;
     gap: 12px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: 25px;
     letter-spacing: 0.5px;
+    flex-wrap: wrap;
 }
 
 .python-banner i {
-    font-size: 24px;
+    font-size: 22px;
     color: #FFD343;
 }
+
+.python-banner .fa-discord { color: #5865F2; }
+
+.banner-divider {
+    color: rgba(255,255,255,0.2);
+    font-weight: 300;
+    font-size: 20px;
+}
+
+/* Section Cards */
+.section-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.section-header {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 10px;
+}
+
+.section-header i { font-size: 16px; color: #a1a1aa; }
+
+.yt-music-icon {
+    width: 18px; height: 18px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+.section-body {
+    font-size: 14px;
+    color: #a1a1aa;
+    line-height: 1.6;
+}
+
+/* Projects */
+.projects-list { display: flex; flex-direction: column; gap: 12px; }
+
+.project-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+
+.project-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.rp-icon { background: rgba(88, 101, 242, 0.15); border: 1px solid rgba(88,101,242,0.3); }
+.rp-icon i { font-size: 20px; color: #5865F2; }
+
+.fbi-icon { background: rgba(0, 40, 104, 0.3); border: 1px solid rgba(255,215,0,0.3); }
+
+.project-name { font-size: 14px; font-weight: 700; color: #fff; }
+.project-desc { font-size: 12px; color: #71717a; margin-top: 2px; }
 
 /* Clock Badge */
 .time-container {
@@ -198,6 +276,7 @@ input[type=range]::-moz-range-progress {
 .btn.roblox:hover { background: rgba(255, 255, 255, 0.9); border-color: #fff; color: #000; }
 .btn.github:hover { background: rgba(43, 49, 55, 0.8); border-color: #8b949e; }
 .btn.roleplay:hover { background: rgba(15, 157, 88, 0.2); border-color: #0F9D58; }
+.btn.paypal:hover { background: rgba(0, 112, 186, 0.2); border-color: #009cde; }
 
 /* --- ENTRANCE ANIMATIONS --- */
 .animate-pop { animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
