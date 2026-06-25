@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBI Utilities - BloxForLife</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(88, 101, 242, 0.2);
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            border-radius: 8px;
+            color: #5865F2;
+            text-decoration: none;
+            margin-bottom: 30px;
+            transition: 0.2s;
+        }
+        .back-btn:hover {
+            background: rgba(88, 101, 242, 0.3);
+        }
+        .project-detail {
+            background: rgba(0, 40, 104, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+        .project-detail h2 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .project-detail-logo {
+            width: 50px;
+            height: 50px;
+        }
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        .features-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #a1a1aa;
+            line-height: 1.6;
+        }
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <div class="container">
+        <div class="profile-card" style="max-width: 800px;">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back to Profile
+            </a>
+
+            <div class="project-detail animate-up">
+                <h2>
+                    <img src="FBI.png" alt="FBI Logo" class="project-detail-logo">
+                    NYCRPP FBI Utilities
+                </h2>
+                
+                <p class="section-body" style="margin-bottom: 20px;">
+                    The NYCRPP FBI Utilities bot is a specialized Discord bot designed for the New York City Roleplay Police (NYCRPP) community. It provides law enforcement and investigation tools tailored for immersive roleplay experiences.
+                </p>
+
+                <h3 style="color: #fff; font-size: 20px; margin-top: 30px; margin-bottom: 15px;">Features</h3>
+                <ul class="features-list">
+                    <li><strong>Case Management</strong> - Organize and track criminal investigations with detailed case files</li>
+                    <li><strong>Evidence Logging</strong> - Document and manage evidence with timestamps and descriptions</li>
+                    <li><strong>Suspect Database</strong> - Maintain records of suspects and criminal history</li>
+                    <li><strong>Warrant System</strong> - Issue and manage arrest and search warrants</li>
+                    <li><strong>Investigation Tools</strong> - Collaborate on active cases with team members</li>
+                    <li><strong>Report Generation</strong> - Create official incident and investigation reports</li>
+                    <li><strong>Role-based Access</strong> - Secure access control for different FBI divisions</li>
+                </ul>
+
+                <h3 style="color: #fff; font-size: 20px; margin-top: 30px; margin-bottom: 15px;">Technologies Used</h3>
+                <p class="section-body">
+                    Built with <strong>Python</strong> and <strong>discord.py</strong>, featuring a robust database backend for reliable data management and seamless Discord integration for real-time team communication.
+                </p>
+
+                <h3 style="color: #fff; font-size: 20px; margin-top: 30px; margin-bottom: 15px;">About the Project</h3>
+                <p class="section-body">
+                    This project showcases advanced Discord bot development, including complex command structures, database integration, permission systems, and user-friendly interfaces. It's designed to enhance the roleplay experience while maintaining the immersion of the NYCRPP universe.
+                </p>
+            </div>
+
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back to Profile
+            </a>
+        </div>
+    </div>
+</body>
+</html>
