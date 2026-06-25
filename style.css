@@ -92,7 +92,7 @@ h1 { font-size: 38px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px
 
 .python-banner i {
     font-size: 24px;
-    color: #FFD343; /* Python Yellow */
+    color: #FFD343;
 }
 
 /* Clock Badge */
@@ -117,7 +117,8 @@ h1 { font-size: 38px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px
 /* Local Music Player */
 .music-player {
     display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 35px;
-    background: rgba(255, 255, 255, 0.05); padding: 15px 25px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05); padding: 15px 25px; border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 .music-icon { color: #a1a1aa; font-size: 20px; }
 .ctrl-btn {
@@ -125,9 +126,61 @@ h1 { font-size: 38px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px
     cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px; transition: 0.2s;
 }
 .ctrl-btn:hover { background: #e0e0e0; transform: scale(1.05); }
-input[type=range] { -webkit-appearance: none; width: 120px; background: transparent; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #fff; cursor: pointer; margin-top: -6px; }
-input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.2); border-radius: 2px; }
+
+/* Volume control wrapper */
+.volume-control {
+    display: flex; align-items: center; gap: 8px;
+}
+.volume-label {
+    font-size: 12px; color: #a1a1aa; white-space: nowrap;
+    display: flex; align-items: center; gap: 5px;
+}
+.volume-label i { font-size: 14px; }
+
+/* Cross-browser range slider */
+input[type=range] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Webkit (Chrome, Safari, Edge) thumb */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px; width: 16px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* Firefox thumb */
+input[type=range]::-moz-range-thumb {
+    height: 16px; width: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Firefox track */
+input[type=range]::-moz-range-track {
+    width: 100%; height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+/* Firefox progress fill */
+input[type=range]::-moz-range-progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+}
 
 /* Links */
 .links { display: flex; flex-direction: column; gap: 15px; }
