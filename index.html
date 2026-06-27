@@ -38,7 +38,7 @@
             
             <h1 class="animate-up delay-1">BloxForLife</h1>
             
-            <div class="custom-status animate-up delay-2" id="custom-status-badge">
+            <div class="custom-status animate-up delay-2" id="custom-status-badge" style="display: none;">
                 <span id="custom-status-emoji"></span>
                 <span id="custom-status-text">Thinking...</span>
             </div>
@@ -64,9 +64,9 @@
             <div class="section-card animate-up delay-4">
                 <div class="section-header"><i class="fa-solid fa-code-branch"></i> Projects</div>
                 <div class="projects-list">
-                    <a href="fbi.html" class="project-item">
+                    <a href="fbi.html" class="project-item" style="text-decoration: none; color: inherit;">
                         <div class="project-icon fbi-icon">
-                            <img src="FBI.png" alt="FBI Logo" class="fbi-logo-img">
+                            <img src="FBI.png" alt="FBI Logo" style="width: 32px; height: 32px; object-fit: contain;">
                         </div>
                         <div class="project-info">
                             <div class="project-name">NYCRPP | Federal Bureau of Investigation Utilities</div>
@@ -80,7 +80,7 @@
                 <i class="fa-regular fa-clock"></i> <span id="local-time">Loading time...</span> (EEST)
             </div>
 
-            <div class="spotify-widget animate-up delay-4" id="spotify-widget">
+            <div class="spotify-widget animate-up delay-4" id="spotify-widget" style="display: none;">
                 <img id="spot-art" src="" alt="Album Art" class="spot-art">
                 <div class="spot-info">
                     <div class="spot-title" id="spot-title">Song Name</div>
@@ -108,7 +108,7 @@
                     <a href="https://lanyard.cafe" target="_blank" class="webring-home">
                         <img src="lanyard.webp" alt="Lanyard Cafe Logo" class="webring-img">
                     </a>
-                    <a href="https://schuh.wtf" id="webring-next" class="webring-nav">Next <i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="https://aureal.dev" id="webring-next" class="webring-nav">Next <i class="fa-solid fa-chevron-right"></i></a>
                 </div>
             </div>
 
@@ -116,7 +116,7 @@
                 <a href="https://paypal.me/MichealJames196" target="_blank" class="btn paypal animate-up delay-6"><i class="fa-brands fa-paypal"></i> Donate via PayPal 🏎️</a>
                 <a href="https://discord.com/users/1075335630353080340" target="_blank" class="btn discord animate-up delay-6"><i class="fa-brands fa-discord"></i> Discord</a>
                 <a href="https://www.roblox.com/users/4548670369/profile" target="_blank" class="btn roblox animate-up delay-7">
-                    <img src="https://git.gay/doughmination/c.stupid.cat/raw/branch/main/assets/socials/roblox.svg" alt="Roblox" class="roblox-icon-img"> Roblox
+                    <img src="https://git.gay/doughmination/c.stupid.cat/raw/branch/main/assets/socials/roblox.svg" alt="Roblox" style="width: 20px; height: 20px;"> Roblox
                 </a>
                 <a href="https://github.com/BloxForLife" target="_blank" class="btn github animate-up delay-8"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://docs.google.com/document/d/11pyDSeXnB-HiSzZjVJNPtorc352CkmRGuYWCB3ZZ16c/edit?usp=sharing" target="_blank" class="btn roleplay animate-up delay-9"><i class="fa-solid fa-book-open"></i> My Roleplay Experience</a>
@@ -144,7 +144,7 @@
             { text: "🏎️ Allocating processing memory for Lego Red Bull F1 Set fund...", delay: 300 },
             { text: "📊 Reading real-time wallet tracking and integration tables...", delay: 150 },
             { text: "☕ Pinging Lanyard Cafe Webring infrastructure routes...", delay: 300 },
-            { text: "🕸️ Native loop arrays resolved cleanly. UI structure locked.", delay: 150 },
+            { text: "🕸️ Webring query complete: fetched nav pointers securely.", delay: 150 },
             { text: "🎵 Audio framework integrated: lyin2me.mp3 staged.", delay: 200 },
             { text: "🎨 Building glassmorphism styles, CSS properties, and fonts...", delay: 150 },
             { text: "🚀 System layout mapping optimized. Boot process finished.", delay: 300 }
@@ -237,9 +237,9 @@
                             } else {
                                 emojiContainer.innerHTML = ''; 
                             }
-                            customBadge.classList.add('visible-flex');
+                            customBadge.style.display = 'inline-flex';
                         } else {
-                            customBadge.classList.remove('visible-flex');
+                            customBadge.style.display = 'none';
                         }
 
                         const spotWidget = document.getElementById('spotify-widget');
@@ -247,38 +247,57 @@
                             document.getElementById('spot-art').src = lData.spotify.album_art_url;
                             document.getElementById('spot-title').innerText = lData.spotify.song;
                             document.getElementById('spot-artist').innerText = lData.spotify.artist;
-                            spotWidget.classList.add('visible-flex');
+                            spotWidget.style.display = 'flex';
                         } else {
-                            spotWidget.classList.remove('visible-flex');
+                            spotWidget.style.display = 'none';
                         }
                     }
                 })
                 .catch(err => console.error('Lanyard Error:', err));
         }
 
-        // --- NATIVE DYNAMIC WEBRING MAPPER ---
+        // --- AUTOMATED LANYARD WEBRING NAV ENGINES ---
         function fetchWebringNav() {
-            fetch('https://lanyard.cafe/api/all')
+            // Check individualized endpoint first
+            fetch(`https://lanyard.cafe/api/nav/${discordId}`)
                 .then(res => res.json())
-                .then(members => {
-                    if (members && members.length > 0) {
-                        // Find where your domain sits in Aureal's compiled repo array
-                        const myIndex = members.findIndex(m => m.url.includes(window.location.hostname) || m.id === discordId);
-                        
-                        if (myIndex !== -1) {
-                            // You are fully merged! Grab exact neighbors smoothly
-                            const prevIdx = (myIndex - 1 + members.length) % members.length;
-                            const nextIdx = (myIndex + 1) % members.length;
-                            document.getElementById('webring-prev').href = members[prevIdx].url;
-                            document.getElementById('webring-next').href = members[nextIdx].url;
-                        } else {
-                            // PR is pending: automatically wrap around outer boundaries perfectly
-                            document.getElementById('webring-prev').href = members[members.length - 1].url;
-                            document.getElementById('webring-next').href = members[0].url;
-                        }
+                .then(navData => {
+                    if (navData && navData.prev && navData.next) {
+                        document.getElementById('webring-prev').href = navData.prev.url;
+                        document.getElementById('webring-next').href = navData.next.url;
+                    } else {
+                        fetchLiveAllFallback();
                     }
                 })
-                .catch(err => console.error('Webring fetch fallback engaged:', err));
+                .catch(() => {
+                    fetchLiveAllFallback();
+                });
+        }
+
+        function fetchLiveAllFallback() {
+            // Instantly query compiled members endpoint mapping Aureal's repository
+            fetch('https://lanyard.cafe/api/all')
+                .then(res => res.json())
+                .then(allMembers => {
+                    if (allMembers && allMembers.length > 0) {
+                        // Dynamically route around the tail boundaries
+                        const prevSite = allMembers[allMembers.length - 1].url;
+                        const nextSite = allMembers[0].url;
+
+                        document.getElementById('webring-prev').href = prevSite;
+                        document.getElementById('webring-next').href = nextSite;
+                    } else {
+                        executeHardcodedFallback();
+                    }
+                })
+                .catch(() => {
+                    executeHardcodedFallback();
+                });
+        }
+
+        function executeHardcodedFallback() {
+            document.getElementById('webring-prev').href = "https://c.stupid.cat"; 
+            document.getElementById('webring-next').href = "https://schuh.wtf";     
         }
 
         fetchLanyardData();
