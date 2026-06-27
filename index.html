@@ -6,24 +6,8 @@
     <title>BloxForLife</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* CSS OVERRIDE: Snaps their floating widget directly into your profile layout */
-        #lanyard-cafe-webring, 
-        .lanyard-cafe-webring,
-        [id*="lanyard-cafe"] {
-            position: static !important;
-            bottom: auto !important;
-            left: auto !important;
-            margin-top: 15px !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
-            z-index: 1 !important;
-        }
-    </style>
 </head>
 <body>
-    <!-- CONSOLE LOADING SCREEN -->
     <div id="console-loader">
         <div class="console-box">
             <div class="console-header">
@@ -33,8 +17,7 @@
                 <span class="console-title">system_boot.sh</span>
             </div>
             <div class="console-body" id="console-log">
-                <!-- Lines will be injected dynamically via JavaScript -->
-            </div>
+                </div>
         </div>
         <div id="enter-prompt" class="enter-prompt">
             <span class="blink-text">[ CLICK ANYWHERE TO ENTER SITE ]</span>
@@ -55,7 +38,7 @@
             
             <h1 class="animate-up delay-1">BloxForLife</h1>
             
-            <div class="custom-status animate-up delay-2" id="custom-status-badge" style="display: none;">
+            <div class="custom-status animate-up delay-2" id="custom-status-badge">
                 <span id="custom-status-emoji"></span>
                 <span id="custom-status-text">Thinking...</span>
             </div>
@@ -73,19 +56,17 @@
                 <span>Discord Bot Dev</span>
             </div>
 
-            <!-- About Me -->
             <div class="section-card animate-up delay-3">
                 <div class="section-header"><i class="fa-solid fa-user"></i> About Me</div>
                 <p class="section-body">Hey! I'm BloxForLife, 14 years old. I'm a Discord bot developer and Python bot developer. Currently working some gigs to save up for the Technic Red Bull F1 Lego set, any donations are appreciated!!!</p>
             </div>
 
-            <!-- Projects -->
             <div class="section-card animate-up delay-4">
                 <div class="section-header"><i class="fa-solid fa-code-branch"></i> Projects</div>
                 <div class="projects-list">
-                    <a href="fbi.html" class="project-item" style="text-decoration: none; color: inherit;">
+                    <a href="fbi.html" class="project-item">
                         <div class="project-icon fbi-icon">
-                            <img src="FBI.png" alt="FBI Logo" style="width: 32px; height: 32px; object-fit: contain;">
+                            <img src="FBI.png" alt="FBI Logo" class="fbi-logo-img">
                         </div>
                         <div class="project-info">
                             <div class="project-name">NYCRPP | Federal Bureau of Investigation Utilities</div>
@@ -99,7 +80,7 @@
                 <i class="fa-regular fa-clock"></i> <span id="local-time">Loading time...</span> (EEST)
             </div>
 
-            <div class="spotify-widget animate-up delay-4" id="spotify-widget" style="display: none;">
+            <div class="spotify-widget animate-up delay-4" id="spotify-widget">
                 <img id="spot-art" src="" alt="Album Art" class="spot-art">
                 <div class="spot-info">
                     <div class="spot-title" id="spot-title">Song Name</div>
@@ -118,8 +99,7 @@
                 </div>
             </div>
 
-            <!-- LANYARD CAFE WEBRING INLINE WIDGET -->
-            <div class="animate-up delay-5">
+            <div class="webring-embed-container animate-up delay-5">
                 <script src="https://lanyard.cafe/api/embed.js" data-theme="dark"></script>
             </div>
 
@@ -127,7 +107,7 @@
                 <a href="https://paypal.me/MichealJames196" target="_blank" class="btn paypal animate-up delay-6"><i class="fa-brands fa-paypal"></i> Donate via PayPal 🏎️</a>
                 <a href="https://discord.com/users/1075335630353080340" target="_blank" class="btn discord animate-up delay-6"><i class="fa-brands fa-discord"></i> Discord</a>
                 <a href="https://www.roblox.com/users/4548670369/profile" target="_blank" class="btn roblox animate-up delay-7">
-                    <img src="https://git.gay/doughmination/c.stupid.cat/raw/branch/main/assets/socials/roblox.svg" alt="Roblox" style="width: 20px; height: 20px;"> Roblox
+                    <img src="https://git.gay/doughmination/c.stupid.cat/raw/branch/main/assets/socials/roblox.svg" alt="Roblox" class="roblox-icon-img"> Roblox
                 </a>
                 <a href="https://github.com/BloxForLife" target="_blank" class="btn github animate-up delay-8"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://docs.google.com/document/d/11pyDSeXnB-HiSzZjVJNPtorc352CkmRGuYWCB3ZZ16c/edit?usp=sharing" target="_blank" class="btn roleplay animate-up delay-9"><i class="fa-solid fa-book-open"></i> My Roleplay Experience</a>
@@ -155,7 +135,7 @@
             { text: "🏎️ Allocating processing memory for Lego Red Bull F1 Set fund...", delay: 300 },
             { text: "📊 Reading real-time wallet tracking and integration tables...", delay: 150 },
             { text: "☕ Pinging Lanyard Cafe Webring infrastructure routes...", delay: 300 },
-            { text: "🕸️ Official inline webring widget script context: INJECTED", delay: 150 },
+            { text: "🕸️ Native script embedded. Separation of styling rule check: PASSED.", delay: 150 },
             { text: "🎵 Audio framework integrated: lyin2me.mp3 staged.", delay: 200 },
             { text: "🎨 Building glassmorphism styles, CSS properties, and fonts...", delay: 150 },
             { text: "🚀 System layout mapping optimized. Boot process finished.", delay: 300 }
@@ -248,9 +228,9 @@
                             } else {
                                 emojiContainer.innerHTML = ''; 
                             }
-                            customBadge.style.display = 'inline-flex';
+                            customBadge.classList.add('visible-flex');
                         } else {
-                            customBadge.style.display = 'none';
+                            customBadge.classList.remove('visible-flex');
                         }
 
                         const spotWidget = document.getElementById('spotify-widget');
@@ -258,9 +238,9 @@
                             document.getElementById('spot-art').src = lData.spotify.album_art_url;
                             document.getElementById('spot-title').innerText = lData.spotify.song;
                             document.getElementById('spot-artist').innerText = lData.spotify.artist;
-                            spotWidget.style.display = 'flex';
+                            spotWidget.classList.add('visible-flex');
                         } else {
-                            spotWidget.style.display = 'none';
+                            spotWidget.classList.remove('visible-flex');
                         }
                     }
                 })
