@@ -213,17 +213,14 @@
                         const u = data.data.discord_user;
                         const lData = data.data;
 
-                        // 1. Avatar
                         if (u.avatar) {
                             const ext = u.avatar.startsWith('a_') ? 'gif' : 'png';
                             document.getElementById('discord-pfp').src = `https://cdn.discordapp.com/avatars/${discordId}/${u.avatar}.${ext}?size=512`;
                         }
 
-                        // 2. Status Dot Color
                         const statusColors = { online: '#23a559', idle: '#f0b232', dnd: '#f23f42', offline: '#80848e' };
                         document.getElementById('discord-status').style.backgroundColor = statusColors[lData.discord_status] || statusColors.offline;
 
-                        // 3. Custom Status
                         const customAct = lData.activities.find(act => act.type === 4);
                         const customBadge = document.getElementById('custom-status-badge');
                         const emojiContainer = document.getElementById('custom-status-emoji');
@@ -245,7 +242,6 @@
                             customBadge.style.display = 'none';
                         }
 
-                        // 4. Spotify Widget
                         const spotWidget = document.getElementById('spotify-widget');
                         if (lData.listening_to_spotify && lData.spotify) {
                             document.getElementById('spot-art').src = lData.spotify.album_art_url;
@@ -260,48 +256,48 @@
                 .catch(err => console.error('Lanyard Error:', err));
         }
 
-        // --- EXPORTED LANYARD CAFE DATABASE ARRAY ---
-        const WEBRING_MEMBERS = [
-            { url: "https://schuh.wtf", name: "schuh", discordId: "492707412504215552" },
-            { url: "https://aureal.dev", name: "aureal", discordId: "1498977251134279900" },
-            { url: "https://akryst.moe", name: "akryst", discordId: "1368371401546928148" },
-            { url: "https://moli.codes", name: "f1sh", discordId: "470904884946796544" },
-            { url: "https://plxne.com", name: "Ranger", discordId: "480900607738380298" },
-            { url: "https://kie.ac", name: "kie.ac", discordId: "673477059904929802" },
-            { url: "https://nichind.dev", name: "nichind", discordId: "301035790891352076" },
-            { url: "https://brookerslyn.space", name: "brook", discordId: "647814047210930223" },
-            { url: "https://assumi.ng", name: "catcatcat", discordId: "1471598614676766826" },
-            { url: "https://c.stupid.cat", name: "clove", discordId: "1464890289922641993" }
-        ];
-
-        // --- LANYARD WEBRING NAVIGATION FETCHER (WITH SMART CODENAME FALLBACK) ---
+        // --- AUTOMATED LANYARD WEBRING NAV ENGINES ---
         function fetchWebringNav() {
+            // Check individualized endpoint first
             fetch(`https://lanyard.cafe/api/nav/${discordId}`)
                 .then(res => res.json())
-                .then(data => {
-                    if (data && data.prev && data.next) {
-                        document.getElementById('webring-prev').href = data.prev.url;
-                        document.getElementById('webring-next').href = data.next.url;
+                .then(navData => {
+                    if (navData && navData.prev && navData.next) {
+                        document.getElementById('webring-prev').href = navData.prev.url;
+                        document.getElementById('webring-next').href = navData.next.url;
                     } else {
-                        runDatabaseArrayFallback();
+                        fetchLiveAllFallback();
                     }
                 })
                 .catch(() => {
-                    runDatabaseArrayFallback();
+                    fetchLiveAllFallback();
                 });
         }
 
-        // Uses the database code logic you found to compute your neighbors locally!
-        function runDatabaseArrayFallback() {
-            // Because you aren't officially pushed into the middle yet, your logical position 
-            // sits at the tail boundary: between the last item (clove) and the first item (schuh).
-            const prevMember = WEBRING_MEMBERS[WEBRING_MEMBERS.length - 1]; // clove
-            const nextMember = WEBRING_MEMBERS[0]; // schuh
+        function fetchLiveAllFallback() {
+            // Instantly query compiled members endpoint mapping Aureal's repository
+            fetch('https://lanyard.cafe/api/all')
+                .then(res => res.json())
+                .then(allMembers => {
+                    if (allMembers && allMembers.length > 0) {
+                        // Dynamically route around the tail boundaries
+                        const prevSite = allMembers[allMembers.length - 1].url;
+                        const nextSite = allMembers[0].url;
 
-            document.getElementById('webring-prev').href = prevMember.url;
-            document.getElementById('webring-next').href = nextMember.url;
-            
-            console.log(`Webring loaded locally: Prev (${prevMember.name}), Next (${nextMember.name})`);
+                        document.getElementById('webring-prev').href = prevSite;
+                        document.getElementById('webring-next').href = nextSite;
+                    } else {
+                        executeHardcodedFallback();
+                    }
+                })
+                .catch(() => {
+                    executeHardcodedFallback();
+                });
+        }
+
+        function executeHardcodedFallback() {
+            document.getElementById('webring-prev').href = "https://c.stupid.cat"; 
+            document.getElementById('webring-next').href = "https://schuh.wtf";     
         }
 
         fetchLanyardData();
