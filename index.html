@@ -258,34 +258,23 @@
 
         // --- AUTOMATED LANYARD WEBRING NAV ENGINES ---
         function fetchWebringNav() {
-            // Check individualized endpoint first
-            fetch(`https://lanyard.cafe/api/nav/${discordId}`)
-                .then(res => res.json())
-                .then(navData => {
-                    if (navData && navData.prev && navData.next) {
-                        document.getElementById('webring-prev').href = navData.prev.url;
-                        document.getElementById('webring-next').href = navData.next.url;
-                    } else {
-                        fetchLiveAllFallback();
-                    }
-                })
-                .catch(() => {
-                    fetchLiveAllFallback();
-                });
-        }
-
-        function fetchLiveAllFallback() {
-            // Instantly query compiled members endpoint mapping Aureal's repository
             fetch('https://lanyard.cafe/api/all')
                 .then(res => res.json())
                 .then(allMembers => {
                     if (allMembers && allMembers.length > 0) {
-                        // Dynamically route around the tail boundaries
-                        const prevSite = allMembers[allMembers.length - 1].url;
-                        const nextSite = allMembers[0].url;
+                        const hostname = window.location.hostname;
+                        let currentIndex = allMembers.findIndex(site => site.url && site.url.includes(hostname));
+                        
+                        // "If your site is not yet a member, it falls back to a random position in the ring."
+                        if (currentIndex === -1) {
+                            currentIndex = Math.floor(Math.random() * allMembers.length);
+                        }
 
-                        document.getElementById('webring-prev').href = prevSite;
-                        document.getElementById('webring-next').href = nextSite;
+                        const prevIndex = (currentIndex - 1 + allMembers.length) % allMembers.length;
+                        const nextIndex = (currentIndex + 1) % allMembers.length;
+
+                        document.getElementById('webring-prev').href = allMembers[prevIndex].url;
+                        document.getElementById('webring-next').href = allMembers[nextIndex].url;
                     } else {
                         executeHardcodedFallback();
                     }
